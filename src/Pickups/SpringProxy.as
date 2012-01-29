@@ -19,7 +19,7 @@ package Pickups
 		
 		public override function update():void {
 			this.x = _parent.x;
-			this.y = _parent.y;
+			this.y = _parent.y - 1;
 		}
 		
 		public function handleObject(obj:FlxSprite): void {

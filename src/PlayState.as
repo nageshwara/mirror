@@ -3,6 +3,8 @@ package
 	import Actors.BaseBoss;
 	import Actors.Hero;
 	
+	import Pickups.BombProxy;
+	import Pickups.Bombs;
 	import Pickups.Spring;
 	import Pickups.SpringProxy;
 	
@@ -18,6 +20,7 @@ package
 		private var springs:FlxGroup;
 		private var springProxies:FlxGroup;
 		private var bombs:FlxGroup;
+		private var bombProxies:FlxGroup;
 		
 		private var fallables:FlxGroup;
 		
@@ -36,6 +39,7 @@ package
 			springs = new FlxGroup();
 			springProxies = new FlxGroup();
 			bombs = new FlxGroup();
+			bombProxies = new FlxGroup();
 			
 			fallables = new FlxGroup();
 			fallables.add(player);
@@ -51,6 +55,8 @@ package
 			
 			add(springs);
 			add(springProxies);
+			add(bombs);
+			add(bombProxies);
 			
 			
 			createSpring(100, 10);
@@ -58,9 +64,9 @@ package
 			createSpring(100, 90);
 			
 
-			createSpring(130, 10);
-			createSpring(130, 70);
-			createSpring(130, 90);
+			createBomb(130, 10);
+			createBomb(130, 70);
+			createBomb(130, 90);
 			
 			
 			loadMap();
@@ -73,6 +79,13 @@ package
 			springProxies.add(spring.springproxy);
 			
 		}
+		
+		private function createBomb(x:int, y:int): void {
+			var bomb:Bombs = new Bombs(x, y);
+			bombs.add(bomb);
+			bombProxies.add(bomb.bombproxy);
+		}
+		
 		
 		public function loadMap():void {
 			
@@ -112,20 +125,28 @@ package
 		
 		
 		override public function update():void
-		{				
+		{	
+			//Updates all the objects appropriately
+			super.update();	
 			FlxG.collide(level,fallables);
-			FlxG.collide(springs, player);			
-			FlxG.collide(springs, oplayer);			
+			FlxG.collide(fallables, fallables);					
 			
 			FlxG.collide(springProxies, player, somethingOnSpring);			
 			FlxG.collide(springProxies, oplayer, somethingOnSpring);			
+
 			
-			//Updates all the objects appropriately
-			super.update();			
+			FlxG.collide(bombProxies, player, somethingNearBomb);			
+			FlxG.collide(bombProxies, oplayer, somethingNearBomb);			
+					
 		}
 				
 		private function somethingOnSpring(char1:SpringProxy, obj:FlxSprite): void {
 			char1.handleObject(obj);
 		}
+		
+		private function somethingNearBomb(char:BombProxy, obj:FlxSprite): void {
+			char.handleObject(obj);
+		}
+		
 	}
 }

@@ -7,31 +7,25 @@ package Pickups
 	
 	public class Bombs extends FlxSprite
 	{
-		private var deployed:Boolean = false;
+		public var deployed:Boolean = false;
+		
+		public var bombproxy:BombProxy;
+		
 		public function Bombs(X:Number=0, Y:Number=0)
 		{
 			super(X, Y);
-			makeGraphic(8,4,0xff11ff11);
+			makeGraphic(8,4,0xff551111);
 			maxVelocity.y = 200;
 			acceleration.y = 200;
 			maxVelocity.x = 40;
 			drag.x = maxVelocity.x*4;
-			solid = true;			
+			solid = true;	
+			
+			bombproxy = new BombProxy(this);
 		}
 		
 		public function deploy(): void {
 			this.deployed = true;
-		}
-		
-		public function onTheBomb(obj:BaseCharacter): void {
-			if (!deployed) {
-				obj.pickup(this);
-				destroy();
-			} else {
-				//Spawn an explosion..
-				obj.hurt(10);
-				destroy();
-			}
-		}
+		}		
 	}
 }

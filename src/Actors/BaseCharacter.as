@@ -13,7 +13,7 @@ package Actors
 			super(X, Y, SimpleGraphic);
 		}
 		
-		public function pickup(obj:Bombs): void {
+		public function pickup(): void {
 			_bombCount = _bombCount + 1;
 		}
 	}
