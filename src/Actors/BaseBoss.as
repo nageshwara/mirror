@@ -13,11 +13,6 @@ package Actors
 		{
 			_target = target;
 			super(X, Y, null);
-			//makeGraphic(8,12,0xff1111aa);
-			maxVelocity.x = 80;
-			maxVelocity.y = 200;
-			acceleration.y = 200;
-			drag.x = maxVelocity.x*4;
 		}
 		
 		
@@ -32,7 +27,7 @@ package Actors
 				this.facing = LEFT;
 			}
 			if(FlxG.keys.justPressed("SPACE") && isTouching(FlxObject.FLOOR))
-				velocity.y = -maxVelocity.y/2;
+				velocity.y = -maxVelocity.y;
 			
 			super.update();
 		}
