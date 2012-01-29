@@ -17,9 +17,9 @@ package
 		public var oplayer:BaseBoss;
 		
 		private var springs:FlxGroup;
-		private var springProxies:FlxGroup;
 		private var bombs:FlxGroup;
-		private var bombProxies:FlxGroup;
+		private var interactables:FlxGroup;
+
 		
 		private var fallables:FlxGroup;
 		
@@ -33,18 +33,16 @@ package
 			FlxG.bgColor = 0xffaaaaaa;	
 			_level = LevelManager.getInstance().LoadTilemap(1);
 			add(_level);
-			
-			/*FlxG.worldBounds.x = -100;
-			FlxG.worldBounds.y = -100;*/
-			FlxG.worldBounds.width = 2000;
-			FlxG.worldBounds.height = 2000;			
+
+			FlxG.worldBounds.width = 800;
+			FlxG.worldBounds.height = 600;			
 			
 			player = new Hero(150, 0);
 			oplayer = new BaseBoss(player, 200, 0);
 			springs = new FlxGroup();
-			springProxies = new FlxGroup();
 			bombs = new FlxGroup();
-			bombProxies = new FlxGroup();
+			
+			interactables = new FlxGroup();
 			
 			fallables = new FlxGroup();
 			fallables.add(player);
@@ -56,9 +54,7 @@ package
 			add(oplayer);
 			
 			add(springs);
-			add(springProxies);
 			add(bombs);
-			add(bombProxies);
 			
 			
 			createSpring(100, 10);
@@ -83,14 +79,14 @@ package
 		private function createSpring(x:int, y:int): void {
 			var spring:Spring = new Spring(x, y);
 			springs.add(spring);
-			springProxies.add(spring.springproxy);
+			interactables.add(spring.springproxy);
 			
 		}
 		
 		private function createBomb(x:int, y:int): void {
 			var bomb:Bombs = new Bombs(x, y);
 			bombs.add(bomb);
-			bombProxies.add(bomb.bombproxy);
+			interactables.add(bomb.bombproxy);
 		}
 		
 		
@@ -102,22 +98,14 @@ package
 			FlxG.collide(_level,fallables);
 			FlxG.collide(fallables, fallables);					
 			
-			FlxG.collide(springProxies, player, somethingOnSpring);			
-			FlxG.collide(springProxies, oplayer, somethingOnSpring);			
+			FlxG.collide(interactables, player, handleInteraction);					
 
-			
-			FlxG.collide(bombProxies, player, somethingNearBomb);			
-			FlxG.collide(bombProxies, oplayer, somethingNearBomb);			
-					
 		}
 				
-		private function somethingOnSpring(char1:SpringProxy, obj:FlxSprite): void {
-			char1.handleObject(obj);
+		private function handleInteraction(interactable:Interactable, obj:FlxSprite): void {
+			interactable.handleObject(obj);
 		}
-		
-		private function somethingNearBomb(char:BombProxy, obj:FlxSprite): void {
-			char.handleObject(obj);
-		}
+
 		
 	}
 }
