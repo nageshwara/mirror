@@ -8,8 +8,6 @@ package
 	import Pickups.Spring;
 	import Pickups.SpringProxy;
 	
-	import Traps.Fire;
-	
 	import org.flixel.*;
 	import org.flixel.plugin.photonstorm.*;
 	
@@ -18,25 +16,24 @@ package
 		public var player:Hero;
 		public var oplayer:BaseBoss;
 		
-		
 		private var springs:FlxGroup;
 		private var bombs:FlxGroup;
-		
-		
 		private var interactables:FlxGroup;
+
 		
 		private var fallables:FlxGroup;
 		
+		private var healthBar:FlxBar;
 		
-		private var level:TiledTilemap
+		private var _level : FlxTilemap;
 		
 		override public function create():void
 		{
 			//Set the background color to light gray (0xAARRGGBB)
-			FlxG.bgColor = 0xffaaaaaa;
-			
-			level = new TiledTilemap();
-			add(level);
+			FlxG.bgColor = 0xffaaaaaa;	
+			_level = LevelManager.getInstance().LoadTilemap(1);
+			add(_level);
+
 			FlxG.worldBounds.width = 800;
 			FlxG.worldBounds.height = 600;			
 			
@@ -46,7 +43,6 @@ package
 			bombs = new FlxGroup();
 			
 			interactables = new FlxGroup();
-
 			
 			fallables = new FlxGroup();
 			fallables.add(player);
@@ -59,7 +55,6 @@ package
 			
 			add(springs);
 			add(bombs);
-			add(interactables);
 			
 			
 			createSpring(100, 10);
@@ -71,8 +66,12 @@ package
 			createBomb(130, 70);
 			createBomb(130, 90);
 			
+			var dummySprite : FlxSprite = new FlxSprite(32 * 5, 32 * 5);
+			dummySprite.makeGraphic(32, 32, 0xffff0000);
+			add(dummySprite);
 			
-			//createFire(150, 250);
+			
+			
 			FlxG.camera.follow(player);
 		}
 		
@@ -90,26 +89,23 @@ package
 			interactables.add(bomb.bombproxy);
 		}
 		
-		private function createFire(x:int, y:int): void {
-			var bomb:Fire = new Fire(x, y);
-			interactables.add(bomb);
-		}		
 		
 		
 		override public function update():void
 		{	
 			//Updates all the objects appropriately
 			super.update();	
-			FlxG.collide(level,fallables);
+			FlxG.collide(_level,fallables);
 			FlxG.collide(fallables, fallables);					
 			
-			FlxG.collide(interactables, player, handleInteraction);			
-			FlxG.collide(interactables, oplayer, handleInteraction);						
-					
+			FlxG.collide(interactables, player, handleInteraction);					
+
 		}
 				
-		private function handleInteraction(inter:Interactable, obj:FlxSprite): void {
-			inter.handleObject(obj);
-		}		
+		private function handleInteraction(interactable:Interactable, obj:FlxSprite): void {
+			interactable.handleObject(obj);
+		}
+
+		
 	}
 }
