@@ -31,7 +31,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"..\/ggj2012\/mirror\/images\/blocks1.png",
+         "image":"blocks1.png",
          "imageheight":352,
          "imagewidth":576,
          "margin":0,

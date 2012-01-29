@@ -6,10 +6,10 @@ package
 	public class ObjectMap
 	{
 		private var _objectMap : Object;
-		public function ObjectMap(tileToLoad : FlxTilemap, tileSize : Number)
+		public function ObjectMap()
 		{	
 			_objectMap = new Object();
-			_objectMap[9] = Bombs;
+			_objectMap[1] = Bombs;
 		}
 		public function GetObjectClassByIndex(idx:Number):Class
 		{
@@ -17,10 +17,8 @@ package
 			{
 				return _objectMap[idx];
 			}
-			else
-			{
-				throw (new Error("Class doesn't exist!!!"));
-			}
+			
+			return null;
 		}
 	}
 }

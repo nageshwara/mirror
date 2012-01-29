@@ -26,12 +26,13 @@ package
 		private var healthBar:FlxBar;
 		
 		private var _level : FlxTilemap;
+		private var _objects : FlxGroup;
 		
 		override public function create():void
 		{
 			//Set the background color to light gray (0xAARRGGBB)
 			FlxG.bgColor = 0xffaaaaaa;	
-			_level = LevelManager.getInstance().LoadTilemap(1);
+			_level = LevelManager.getInstance().LoadTilemap(3);
 			add(_level);
 			
 			/*FlxG.worldBounds.x = -100;
@@ -70,11 +71,14 @@ package
 			createBomb(130, 70);
 			createBomb(130, 90);
 			
+			/*
 			var dummySprite : FlxSprite = new FlxSprite(32 * 5, 32 * 5);
 			dummySprite.makeGraphic(32, 32, 0xffff0000);
 			add(dummySprite);
+			*/
 			
-			
+			_objects = LevelManager.getInstance().loadObjectGroup();
+			add(_objects);
 			
 			FlxG.camera.follow(player);
 		}
@@ -93,8 +97,6 @@ package
 			bombProxies.add(bomb.bombproxy);
 		}
 		
-		
-		
 		override public function update():void
 		{	
 			//Updates all the objects appropriately
@@ -107,7 +109,9 @@ package
 
 			
 			FlxG.collide(bombProxies, player, somethingNearBomb);			
-			FlxG.collide(bombProxies, oplayer, somethingNearBomb);			
+			FlxG.collide(bombProxies, oplayer, somethingNearBomb);	
+			
+			FlxG.collide(_level, _objects);
 					
 		}
 				
