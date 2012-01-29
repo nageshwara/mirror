@@ -18,13 +18,12 @@ package
 		
 		
 		private var springs:FlxGroup;
-		private var springProxies:FlxGroup;
 		private var bombs:FlxGroup;
-		private var bombProxies:FlxGroup;
+		
+		
+		private var interactables:FlxGroup;
 		
 		private var fallables:FlxGroup;
-		
-		private var healthBar:FlxBar;
 		
 		
 		private var level:TiledTilemap
@@ -45,9 +44,10 @@ package
 			player = new Hero(150, 0);
 			oplayer = new BaseBoss(player, 200, 0);
 			springs = new FlxGroup();
-			springProxies = new FlxGroup();
 			bombs = new FlxGroup();
-			bombProxies = new FlxGroup();
+			
+			interactables = new FlxGroup();
+
 			
 			fallables = new FlxGroup();
 			fallables.add(player);
@@ -59,9 +59,8 @@ package
 			add(oplayer);
 			
 			add(springs);
-			add(springProxies);
 			add(bombs);
-			add(bombProxies);
+			add(interactables);
 			
 			
 			createSpring(100, 10);
@@ -80,14 +79,14 @@ package
 		private function createSpring(x:int, y:int): void {
 			var spring:Spring = new Spring(x, y);
 			springs.add(spring);
-			springProxies.add(spring.springproxy);
+			interactables.add(spring.springproxy);
 			
 		}
 		
 		private function createBomb(x:int, y:int): void {
 			var bomb:Bombs = new Bombs(x, y);
 			bombs.add(bomb);
-			bombProxies.add(bomb.bombproxy);
+			interactables.add(bomb.bombproxy);
 		}
 		
 		
@@ -99,22 +98,13 @@ package
 			FlxG.collide(level,fallables);
 			FlxG.collide(fallables, fallables);					
 			
-			FlxG.collide(springProxies, player, somethingOnSpring);			
-			FlxG.collide(springProxies, oplayer, somethingOnSpring);			
-
-			
-			FlxG.collide(bombProxies, player, somethingNearBomb);			
-			FlxG.collide(bombProxies, oplayer, somethingNearBomb);			
+			FlxG.collide(interactables, player, handleInteraction);			
+			FlxG.collide(interactables, oplayer, handleInteraction);						
 					
 		}
 				
-		private function somethingOnSpring(char1:SpringProxy, obj:FlxSprite): void {
+		private function handleInteraction(char1:Interactable, obj:FlxSprite): void {
 			char1.handleObject(obj);
-		}
-		
-		private function somethingNearBomb(char:BombProxy, obj:FlxSprite): void {
-			char.handleObject(obj);
-		}
-		
+		}		
 	}
 }
