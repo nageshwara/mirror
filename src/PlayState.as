@@ -37,8 +37,8 @@ package
 			
 			level = new TiledTilemap();
 			add(level);
-			FlxG.worldBounds.width = 2000;
-			FlxG.worldBounds.height = 2000;			
+			FlxG.worldBounds.width = 800;
+			FlxG.worldBounds.height = 600;			
 			
 			player = new Hero(150, 0);
 			oplayer = new BaseBoss(player, 200, 0);
@@ -72,7 +72,7 @@ package
 			createBomb(130, 90);
 			
 			
-			createFire(150, 250);
+			//createFire(150, 250);
 			FlxG.camera.follow(player);
 		}
 		
