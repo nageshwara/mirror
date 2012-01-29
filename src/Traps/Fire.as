@@ -6,6 +6,10 @@ package Traps
 		{
 			super(x, y);
 			//Make Graphic
+			makeGraphic(15,20,0xff555511);
+			maxVelocity.y = 0;
+			maxVelocity.x = 0;
+			solid = true;			
 		}
 	}
 }

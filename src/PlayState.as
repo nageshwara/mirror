@@ -8,6 +8,8 @@ package
 	import Pickups.Spring;
 	import Pickups.SpringProxy;
 	
+	import Traps.Fire;
+	
 	import org.flixel.*;
 	import org.flixel.plugin.photonstorm.*;
 	
@@ -35,9 +37,6 @@ package
 			
 			level = new TiledTilemap();
 			add(level);
-			
-			/*FlxG.worldBounds.x = -100;
-			FlxG.worldBounds.y = -100;*/
 			FlxG.worldBounds.width = 2000;
 			FlxG.worldBounds.height = 2000;			
 			
@@ -72,6 +71,8 @@ package
 			createBomb(130, 70);
 			createBomb(130, 90);
 			
+			
+			createFire(150, 250);
 			FlxG.camera.follow(player);
 		}
 		
@@ -89,6 +90,10 @@ package
 			interactables.add(bomb.bombproxy);
 		}
 		
+		private function createFire(x:int, y:int): void {
+			var bomb:Fire = new Fire(x, y);
+			interactables.add(bomb);
+		}		
 		
 		
 		override public function update():void
@@ -103,8 +108,8 @@ package
 					
 		}
 				
-		private function handleInteraction(char1:Interactable, obj:FlxSprite): void {
-			char1.handleObject(obj);
+		private function handleInteraction(inter:Interactable, obj:FlxSprite): void {
+			inter.handleObject(obj);
 		}		
 	}
 }
