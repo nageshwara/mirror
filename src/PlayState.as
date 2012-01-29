@@ -16,7 +16,6 @@ package
 		public var player:Hero;
 		public var oplayer:BaseBoss;
 		
-		
 		private var springs:FlxGroup;
 		private var springProxies:FlxGroup;
 		private var bombs:FlxGroup;
@@ -26,16 +25,14 @@ package
 		
 		private var healthBar:FlxBar;
 		
-		
-		private var level:TiledTilemap
+		private var _level : FlxTilemap;
 		
 		override public function create():void
 		{
 			//Set the background color to light gray (0xAARRGGBB)
-			FlxG.bgColor = 0xffaaaaaa;
-			
-			level = new TiledTilemap();
-			add(level);
+			FlxG.bgColor = 0xffaaaaaa;	
+			_level = LevelManager.getInstance().LoadTilemap(1);
+			add(_level);
 			
 			/*FlxG.worldBounds.x = -100;
 			FlxG.worldBounds.y = -100;*/
@@ -73,6 +70,12 @@ package
 			createBomb(130, 70);
 			createBomb(130, 90);
 			
+			var dummySprite : FlxSprite = new FlxSprite(32 * 5, 32 * 5);
+			dummySprite.makeGraphic(32, 32, 0xffff0000);
+			add(dummySprite);
+			
+			
+			
 			FlxG.camera.follow(player);
 		}
 		
@@ -96,7 +99,7 @@ package
 		{	
 			//Updates all the objects appropriately
 			super.update();	
-			FlxG.collide(level,fallables);
+			FlxG.collide(_level,fallables);
 			FlxG.collide(fallables, fallables);					
 			
 			FlxG.collide(springProxies, player, somethingOnSpring);			
