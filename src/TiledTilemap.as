@@ -52,7 +52,7 @@ package
 			}
 			*/
 			//trace((_layers[0]["data"] as Array));
-			this.loadMap(FlxTilemap.arrayToCSV(_layers[0]["data"], _layers[0]["width"]), tiletable.GetTilesetByFilename(_tilesets[0]["image"]), _tilewidth + 2 , _tileheight + 2 , OFF, 1, 1, 2);
+			this.loadMap(FlxTilemap.arrayToCSV(_layers[0]["data"], _layers[0]["width"]), tiletable.GetTilesetByFilename(_tilesets[0]["image"]), _tilewidth, _tileheight, OFF, 1, 1, 2);
 
 			
 		}
