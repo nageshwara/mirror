@@ -13,7 +13,7 @@ package Actors
 		{
 			_target = target;
 			super(X, Y, null);
-			makeGraphic(8,12,0xff1111aa);
+			//makeGraphic(8,12,0xff1111aa);
 			maxVelocity.x = 80;
 			maxVelocity.y = 200;
 			acceleration.y = 200;
@@ -23,10 +23,14 @@ package Actors
 		
 		public override function update():void {
 			acceleration.x = 0;
-			if(FlxG.keys.LEFT)
+			if(FlxG.keys.LEFT) {
 				acceleration.x = maxVelocity.x*4;
-			if(FlxG.keys.RIGHT)
+				this.facing = RIGHT;
+			}
+			if(FlxG.keys.RIGHT) {
 				acceleration.x = -maxVelocity.x*4;
+				this.facing = LEFT;
+			}
 			if(FlxG.keys.justPressed("SPACE") && isTouching(FlxObject.FLOOR))
 				velocity.y = -maxVelocity.y/2;
 			
