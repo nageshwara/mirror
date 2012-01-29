@@ -35,8 +35,6 @@ package
 			
 			_jsonData = com.adobe.serialization.json.JSON.decode(jsonString);
 			
-						
-			
 			_height = _jsonData["height"];
 			_width = _jsonData["width"];
 			_layers = _jsonData["layers"];
@@ -45,13 +43,7 @@ package
 			_tileheight = _jsonData["tileheight"];
 			_tilewidth = _jsonData["tilewidth"];
 			_tilesets = _jsonData["tilesets"];
-			/*
-			for(var i : Number = 0; i < (_layers[0]["data"] as Array).length; i++)
-			{
-				(_layers[0]["data"] as Array)[i]--;
-			}
-			*/
-			//trace((_layers[0]["data"] as Array));
+			
 			this.loadMap(FlxTilemap.arrayToCSV(_layers[0]["data"], _layers[0]["width"]), tiletable.GetTilesetByFilename(_tilesets[0]["image"]), _tilewidth, _tileheight, OFF, 1, 1, 2);
 
 			
