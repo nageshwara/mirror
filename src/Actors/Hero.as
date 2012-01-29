@@ -11,11 +11,7 @@ package Actors
 		{
 			//TODO: implement function
 			super(X, Y);
-			//makeGraphic(8,12,0xffaa1111);
-			maxVelocity.x = 80;
-			maxVelocity.y = 200;
-			acceleration.y = 200;
-			drag.x = maxVelocity.x*4;			
+		
 		}
 		
 		public override function update():void {			
@@ -29,7 +25,7 @@ package Actors
 				this.facing = RIGHT;
 			}
 			if(FlxG.keys.justPressed("SPACE") && isTouching(FlxObject.FLOOR))
-				velocity.y = -maxVelocity.y/2;
+				velocity.y = -maxVelocity.y;
 			
 			super.update();
 		}

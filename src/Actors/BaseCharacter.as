@@ -24,6 +24,11 @@ package Actors
 			addAnimation("still",[0]);
 			addAnimation("jump",[5]);
 			
+			maxVelocity.x = 80;
+			maxVelocity.y = 130;
+			acceleration.y = 200;
+			drag.x = maxVelocity.x*4;			
+			
 			width = 12;
 			offset = new FlxPoint(9, 0); 			
 		}
