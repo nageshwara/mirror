@@ -49,6 +49,12 @@ package Actors
 			}
 			
 			super.update();
+			
+			if (x < 0) {
+				x = FlxG.worldBounds.width + x;
+			} else if (x > FlxG.worldBounds.width) {
+				x = x - FlxG.worldBounds.width;
+			}
 		}//update end		
 	}
 }

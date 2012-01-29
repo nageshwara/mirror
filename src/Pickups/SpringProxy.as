@@ -5,7 +5,7 @@ package Pickups
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
 	
-	public class SpringProxy extends FlxSprite
+	public class SpringProxy extends Interactable
 	{
 		private var _parent:Spring;
 		public function SpringProxy(parent:Spring, X:Number=0, Y:Number=0)
@@ -22,7 +22,7 @@ package Pickups
 			this.y = _parent.y - 1;
 		}
 		
-		public function handleObject(obj:FlxSprite): void {
+		public override function handleObject(obj:FlxSprite): void {
 				obj.velocity.y = -obj.maxVelocity.y/2;
 		}
 	}

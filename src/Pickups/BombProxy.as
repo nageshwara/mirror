@@ -7,7 +7,7 @@ package Pickups
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
 	
-	public class BombProxy extends FlxSprite
+	public class BombProxy extends Interactable
 	{
 		private var _parent:Bombs;
 		
@@ -26,7 +26,7 @@ package Pickups
 			this.y = _parent.y - TRIGGER_AREA/2;
 		}
 
-		public function handleObject(obj:FlxSprite): void {			
+		public override function handleObject(obj:FlxSprite): void {			
 			var char:BaseCharacter = obj as BaseCharacter;
 			if (!_parent.deployed) {
 				//trace("Parent is being destoryed");
