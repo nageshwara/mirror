@@ -55,6 +55,11 @@ package Actors
 			} else if (x > FlxG.worldBounds.width) {
 				x = x - FlxG.worldBounds.width;
 			}
+			
+			
+			if (y < 0) {
+				kill();
+			}
 		}//update end		
 	}
 }

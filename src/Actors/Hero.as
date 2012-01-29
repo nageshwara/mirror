@@ -29,5 +29,10 @@ package Actors
 			
 			super.update();
 		}
+		
+		
+		public override function kill(): void {
+			super.kill();
+		}
 	}
 }
