@@ -31,9 +31,10 @@ package
 		{
 			var tiletable : Tilesets = new Tilesets();
 			
-			var jsonString : String = new LEVEL1();			
-			_jsonData = JSON.decode(jsonString);			
+			var jsonString : String = new LEVEL1();				
+			_jsonData = com.adobe.serialization.json.JSON.decode(jsonString);
 			
+						
 			
 			_height = _jsonData["height"];
 			_width = _jsonData["width"];
