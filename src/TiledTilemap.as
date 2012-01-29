@@ -32,7 +32,7 @@ package
 			var tiletable : Tilesets = new Tilesets();
 			
 			var jsonString : String = new LEVEL1();			
-			_jsonData = JSON.decode(jsonString);
+			_jsonData = JSON.decode(jsonString);			
 			
 			
 			_height = _jsonData["height"];
@@ -50,7 +50,7 @@ package
 			}
 			*/
 			//trace((_layers[0]["data"] as Array));
-			this.loadMap(FlxTilemap.arrayToCSV(_layers[0]["data"], _layers[0]["width"]), tiletable.GetTilesetByFilename(_tilesets[0]["image"]), _tilewidth + 2 , _tileheight + 2 , OFF, 1, 1, 2);
+			this.loadMap(FlxTilemap.arrayToCSV(_layers[0]["data"], _layers[0]["width"]), tiletable.GetTilesetByFilename(_tilesets[0]["image"]), _tilewidth, _tileheight, OFF, 1, 1, 2);
 
 			
 		}
